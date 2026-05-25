@@ -1,0 +1,2195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ============================================================
+       META & SEO
+  ============================================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Stellamaries Syombua — Data Analyst, Machine Learning Engineer, and AI Solutions specialist. Transforming raw data into measurable impact." />
+  <meta name="keywords" content="data analysis, machine learning, AI, data science, Python, statistics, visualization, Stellamaries Syombua" />
+  <meta name="author" content="Stellamaries Syombua" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Stellamaries Syombua | Data Analysis · ML · AI" />
+  <meta property="og:description" content="Turning complex data into intelligent, actionable insights." />
+  <meta property="og:type" content="website" />
+  <title>Stellamaries Syombua | Data Analysis · ML · AI Solutions</title>
+
+  <!-- ============================================================
+       FONTS — Poppins (display) + Inter (body)
+  ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- ============================================================
+       TAILWIND CSS CDN
+  ============================================================ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- ============================================================
+       FONT AWESOME ICONS
+  ============================================================ -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- ============================================================
+       TAILWIND CONFIG — custom theme tokens
+  ============================================================ -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bg-base':    '#0a0a0a',
+            'bg-card':    '#1a1a1a',
+            'bg-card2':   '#141414',
+            'border-sub': '#2a2a2a',
+            'text-main':  '#e0e0e0',
+            'text-muted': '#888888',
+            'accent':     '#00d4ff',
+            'accent-dim': '#0099bb',
+            'accent-glow':'rgba(0,212,255,0.15)',
+          },
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+            inter:   ['Inter', 'sans-serif'],
+            mono:    ['JetBrains Mono', 'monospace'],
+          },
+        }
+      }
+    };
+  </script>
+
+  <!-- ============================================================
+       CUSTOM CSS — animations, variables, fine-grain styles
+  ============================================================ -->
+  <style>
+    /* --- CSS Custom Properties -------------------------------- */
+    :root {
+      --accent:       #00d4ff;
+      --accent-dim:   #0099bb;
+      --accent-glow:  rgba(0, 212, 255, 0.15);
+      --bg-base:      #0a0a0a;
+      --bg-card:      #1a1a1a;
+      --text-main:    #e0e0e0;
+      --text-muted:   #888;
+      --border-sub:   #2a2a2a;
+      --transition:   all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* --- Base Reset ------------------------------------------ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+    ::selection { background: var(--accent); color: #000; }
+
+    /* --- Scrollbar ------------------------------------------- */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg-base); }
+    ::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 4px; }
+
+    /* --- Background Grid Overlay ----------------------------- */
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .noise-overlay {
+      position: fixed;
+      inset: 0;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+    main, header, footer { position: relative; z-index: 1; }
+
+    /* --- Accent text & glow ---------------------------------- */
+    .accent-text { color: var(--accent); }
+    .accent-border { border-color: var(--accent); }
+    .glow-box {
+      box-shadow: 0 0 30px var(--accent-glow), 0 0 60px rgba(0,212,255,0.05);
+    }
+    .glow-text { text-shadow: 0 0 20px rgba(0,212,255,0.4); }
+
+    /* --- Navigation ------------------------------------------ */
+    #navbar {
+      transition: var(--transition);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    #navbar.scrolled {
+      background: rgba(10,10,10,0.95) !important;
+      border-bottom: 1px solid var(--border-sub);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+    }
+    .nav-link {
+      position: relative;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      transition: var(--transition);
+      padding-bottom: 2px;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover { color: var(--text-main); }
+    .nav-link:hover::after { width: 100%; }
+
+    /* --- Hero ----------------------------------------------- */
+    .hero-gradient {
+      background: radial-gradient(ellipse 80% 60% at 60% 50%, rgba(0,212,255,0.06) 0%, transparent 70%);
+    }
+    .hero-img-wrap {
+      position: relative;
+    }
+    .hero-img-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 50%;
+      background: conic-gradient(var(--accent), transparent, var(--accent-dim), transparent, var(--accent));
+      animation: spin 8s linear infinite;
+      z-index: -1;
+    }
+    .hero-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      z-index: -2;
+    }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.2);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .hero-badge .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50% { opacity:0.5; transform:scale(0.8); }
+    }
+
+    .typewriter {
+      display: inline-block;
+      border-right: 2px solid var(--accent);
+      animation: blink 0.8s step-end infinite;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    @keyframes blink { 50% { border-color: transparent; } }
+
+    /* --- Scroll Animations ----------------------------------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Stagger delays */
+    .delay-100 { transition-delay: 0.1s; }
+    .delay-200 { transition-delay: 0.2s; }
+    .delay-300 { transition-delay: 0.3s; }
+    .delay-400 { transition-delay: 0.4s; }
+    .delay-500 { transition-delay: 0.5s; }
+    .delay-600 { transition-delay: 0.6s; }
+
+    /* --- Cards ----------------------------------------------- */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-sub);
+      border-radius: 16px;
+      transition: var(--transition);
+      overflow: hidden;
+    }
+    .card:hover {
+      border-color: rgba(0,212,255,0.3);
+      box-shadow: 0 8px 32px rgba(0,212,255,0.08), 0 2px 8px rgba(0,0,0,0.4);
+      transform: translateY(-4px);
+    }
+
+    /* --- Section heading ------------------------------------- */
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .section-heading {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.15;
+      color: var(--text-main);
+    }
+    .section-divider {
+      width: 48px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      margin: 1rem 0;
+    }
+
+    /* --- Skill bars ------------------------------------------ */
+    .skill-bar-wrap {
+      background: var(--border-sub);
+      border-radius: 100px;
+      height: 5px;
+      overflow: hidden;
+    }
+    .skill-bar-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+      width: 0;
+      transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* --- Pill tags ------------------------------------------- */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      padding: 4px 10px;
+      border-radius: 100px;
+      background: rgba(0,212,255,0.07);
+      border: 1px solid rgba(0,212,255,0.15);
+      color: var(--accent);
+    }
+
+    /* --- Stats counter --------------------------------------- */
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-sub);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+
+    /* --- Project image lightbox ------------------------------ */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+    }
+    #lightbox.active { display: flex; }
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 12px;
+      border: 1px solid var(--border-sub);
+      box-shadow: 0 0 60px rgba(0,212,255,0.1);
+    }
+    #lightbox-close {
+      position: absolute;
+      top: 1.5rem; right: 1.5rem;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-sub);
+      color: var(--text-main);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: var(--transition);
+    }
+    #lightbox-close:hover { background: var(--accent); color: #000; }
+
+    /* --- Contact form ---------------------------------------- */
+    .form-input {
+      width: 100%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-sub);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      outline: none;
+    }
+    .form-input:focus {
+      border-color: var(--accent);
+      background: rgba(0,212,255,0.04);
+      box-shadow: 0 0 0 3px rgba(0,212,255,0.08);
+    }
+    .form-input.error { border-color: #ff4d4d; }
+    .form-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      display: block;
+    }
+    .error-msg {
+      font-size: 0.75rem;
+      color: #ff4d4d;
+      margin-top: 4px;
+      display: none;
+    }
+    .error-msg.show { display: block; }
+
+    /* --- Buttons --------------------------------------------- */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #000;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.88rem;
+      letter-spacing: 0.03em;
+      padding: 13px 28px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      background: var(--accent-dim);
+      box-shadow: 0 8px 24px rgba(0,212,255,0.3);
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--accent);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.88rem;
+      letter-spacing: 0.03em;
+      padding: 12px 28px;
+      border-radius: 10px;
+      border: 1px solid var(--accent);
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    .btn-outline:hover {
+      background: rgba(0,212,255,0.08);
+      box-shadow: 0 8px 24px rgba(0,212,255,0.15);
+      transform: translateY(-2px);
+    }
+
+    /* --- Back to top ----------------------------------------- */
+    #back-to-top {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-sub);
+      color: var(--accent);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+      z-index: 100;
+    }
+    #back-to-top.visible { opacity: 1; pointer-events: auto; }
+    #back-to-top:hover {
+      background: var(--accent);
+      color: #000;
+      transform: translateY(-3px);
+    }
+
+    /* --- Mobile menu ----------------------------------------- */
+    #mobile-menu {
+      display: none;
+      background: rgba(10,10,10,0.98);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-sub);
+    }
+    #mobile-menu.open { display: block; }
+
+    /* --- Hamburger ------------------------------------------- */
+    .hamburger { cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--text-main);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* --- Testimonials ---------------------------------------- */
+    .testimonial-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-sub);
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+      transition: var(--transition);
+    }
+    .testimonial-card:hover {
+      border-color: rgba(0,212,255,0.2);
+      transform: translateY(-4px);
+    }
+    .quote-mark {
+      font-family: 'Poppins', sans-serif;
+      font-size: 5rem;
+      line-height: 0.6;
+      color: var(--accent);
+      opacity: 0.2;
+      position: absolute;
+      top: 1.5rem; left: 1.5rem;
+    }
+
+    /* --- Service cards -------------------------------------- */
+    .service-icon {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      transition: var(--transition);
+    }
+    .card:hover .service-icon {
+      background: var(--accent);
+      color: #000;
+      box-shadow: 0 0 20px rgba(0,212,255,0.4);
+    }
+
+    /* --- Timeline (Case Studies) ----------------------------- */
+    .timeline-line {
+      position: absolute;
+      left: 19px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, var(--accent), transparent);
+    }
+    .timeline-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg-base);
+      box-shadow: 0 0 10px var(--accent);
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    /* --- Certification card ---------------------------------- */
+    .cert-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-sub);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: var(--transition);
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .cert-card:hover {
+      border-color: rgba(0,212,255,0.25);
+      transform: translateX(4px);
+    }
+    .cert-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    /* --- Footer --------------------------------------------- */
+    footer {
+      border-top: 1px solid var(--border-sub);
+    }
+    .footer-link {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      transition: var(--transition);
+      text-decoration: none;
+      display: inline-block;
+    }
+    .footer-link:hover { color: var(--accent); transform: translateX(4px); }
+
+    .social-btn {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-sub);
+      display: inline-flex; align-items: center; justify-content: center;
+      color: var(--text-muted);
+      font-size: 1rem;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    .social-btn:hover {
+      background: rgba(0,212,255,0.1);
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    /* --- Toast notification ---------------------------------- */
+    #toast {
+      position: fixed;
+      bottom: 5rem; right: 2rem;
+      background: var(--bg-card);
+      border: 1px solid rgba(0,212,255,0.3);
+      border-radius: 12px;
+      padding: 14px 20px;
+      font-size: 0.85rem;
+      color: var(--text-main);
+      display: flex; align-items: center; gap: 10px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: var(--transition);
+      pointer-events: none;
+      z-index: 200;
+    }
+    #toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- Misc helpers --------------------------------------- */
+    .section-pad { padding: 96px 0; }
+    @media (max-width: 768px) { .section-pad { padding: 64px 0; } }
+
+    /* Project image hover zoom */
+    .project-img {
+      overflow: hidden;
+      border-radius: 10px;
+    }
+    .project-img img {
+      width: 100%;
+      transition: transform 0.5s ease;
+      cursor: zoom-in;
+    }
+    .project-img:hover img { transform: scale(1.06); }
+  </style>
+</head>
+
+<body>
+  <!-- Background decorative overlays -->
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       LIGHTBOX
+  ============================================================ -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button id="lightbox-close" aria-label="Close image viewer"><i class="fa-solid fa-xmark"></i></button>
+    <img id="lightbox-img" src="" alt="Project preview" />
+  </div>
+
+  <!-- ============================================================
+       BACK TO TOP
+  ============================================================ -->
+  <button id="back-to-top" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- ============================================================
+       TOAST NOTIFICATION
+  ============================================================ -->
+  <div id="toast" role="status" aria-live="polite">
+    <i class="fa-solid fa-check-circle" style="color:var(--accent)"></i>
+    <span id="toast-msg">Message sent!</span>
+  </div>
+
+  <!-- ============================================================
+       HEADER / NAVIGATION
+  ============================================================ -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-transparent">
+    <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between" aria-label="Primary navigation">
+      <!-- Logo / wordmark -->
+      <a href="#home" class="flex items-center gap-3" aria-label="Stellamaries Syombua home">
+        <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent-dim));display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:'Poppins',sans-serif;font-weight:800;font-size:0.85rem;color:#000;">SS</span>
+        </div>
+        <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.95rem;color:var(--text-main);">Stellamaries</span>
+      </a>
+
+      <!-- Desktop nav links -->
+      <ul class="hidden lg:flex items-center gap-8" role="list">
+        <li><a href="#about"   class="nav-link">About</a></li>
+        <li><a href="#skills"  class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#case-studies" class="nav-link">Case Studies</a></li>
+        <li><a href="#certifications" class="nav-link">Certs</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <!-- CTA + Hamburger -->
+      <div class="flex items-center gap-4">
+        <a href="#resume" class="btn-outline hidden lg:inline-flex" style="padding:9px 20px;font-size:0.8rem;">
+          <i class="fa-solid fa-download"></i> Resume
+        </a>
+        <!-- Hamburger button (mobile) -->
+        <button class="hamburger lg:hidden" id="hamburger-btn" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+      <ul class="px-6 py-4 flex flex-col gap-4" role="list">
+        <li><a href="#about"        class="mobile-nav-link block py-2 text-gray-400 hover:text-white font-medium" style="font-family:'Inter',sans-serif;font-size:0.9rem;">About</a></li>
+        <li><a href="#skills"       class="mobile-nav-link block py-2 text-gray-400 hover:text-white font-medium" style="font-family:'Inter',sans-serif;font-size:0.9rem;">Skills</a></li>
+        <li><a href="#projects"     class="mobile-nav-link block py-2 text-gray-400 hover:text-white font-medium" style="font-family:'Inter',sans-serif;font-size:0.9rem;">Projects</a></li>
+        <li><a href="#services"     class="mobile-nav-link block py-2 text-gray-400 hover:text-white font-medium" style="font-family:'Inter',sans-serif;font-size:0.9rem;">Services</a></li>
+        <li><a href="#case-studies" class="mobile-nav-link block py-2 text-gray-400 hover:text-white font-medium" style="font-family:'Inter',sans-serif;font-size:0.9rem;">Case Studies</a></li>
+        <li><a href="#certifications" class="mobile-nav-link block py-2 text-gray-400 hover:text-white font-medium" style="font-family:'Inter',sans-serif;font-size:0.9rem;">Certifications</a></li>
+        <li><a href="#contact"      class="mobile-nav-link block py-2 text-gray-400 hover:text-white font-medium" style="font-family:'Inter',sans-serif;font-size:0.9rem;">Contact</a></li>
+        <li class="pt-2"><a href="#resume" class="btn-outline w-full text-center justify-center" style="font-size:0.85rem;"><i class="fa-solid fa-download"></i> Download Resume</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================================================
+         HERO SECTION
+    ============================================================ -->
+    <section id="home" class="min-h-screen flex items-center hero-gradient relative overflow-hidden" aria-label="Hero introduction">
+      <!-- Decorative blobs -->
+      <div style="position:absolute;top:20%;right:0;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,0.04),transparent 70%);pointer-events:none;" aria-hidden="true"></div>
+      <div style="position:absolute;bottom:10%;left:-100px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(0,150,200,0.05),transparent 70%);pointer-events:none;" aria-hidden="true"></div>
+
+      <div class="max-w-7xl mx-auto px-6 py-32 lg:py-0 w-full">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          <!-- Left: Text content -->
+          <div>
+            <div class="hero-badge">
+              <span class="dot"></span>
+              Available for Projects &amp; Collaborations
+            </div>
+
+            <h1 style="font-family:'Poppins',sans-serif;font-weight:800;font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.1;margin-bottom:1.25rem;">
+              Hi, I'm<br />
+              <span class="accent-text glow-text">Stellamaries</span><br />
+              <span style="color:#666;font-weight:300;font-size:clamp(1.4rem,3vw,2.2rem);">Syombua</span>
+            </h1>
+
+            <!-- Animated tagline -->
+            <p style="font-family:'JetBrains Mono',monospace;font-size:1rem;color:var(--text-muted);margin-bottom:1.5rem;">
+              <span id="typewriter" class="accent-text"></span>
+            </p>
+
+            <p style="font-size:1.05rem;color:var(--text-muted);line-height:1.8;max-width:500px;margin-bottom:2.5rem;">
+              I work at the intersection of <strong style="color:var(--text-main);">data analysis</strong> and <strong style="color:var(--text-main);">machine learning</strong>, using statistics, modeling, and data visualization to explore important questions and turn raw data into clear, practical insights that support better decisions and real impact.
+            </p>
+
+            <!-- CTA buttons -->
+            <div class="flex flex-wrap gap-4 mb-10">
+              <a href="#projects" class="btn-primary">
+                <i class="fa-solid fa-rocket"></i> View My Work
+              </a>
+              <a href="#contact" class="btn-outline">
+                <i class="fa-regular fa-envelope"></i> Get In Touch
+              </a>
+            </div>
+
+            <!-- Social quick links -->
+            <div class="flex items-center gap-4">
+              <span style="font-size:0.75rem;color:var(--text-muted);font-family:'Inter',sans-serif;letter-spacing:0.08em;">FIND ME ON</span>
+              <div class="flex gap-2">
+                <a href="https://github.com" target="_blank" rel="noopener" class="social-btn" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://kaggle.com" target="_blank" rel="noopener" class="social-btn" aria-label="Kaggle"><i class="fa-solid fa-k" style="font-size:0.85rem;font-weight:700;"></i></a>
+                <a href="https://orcid.org" target="_blank" rel="noopener" class="social-btn" aria-label="ORCID"><i class="fa-brands fa-orcid"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Profile image -->
+          <div class="flex justify-center lg:justify-end reveal delay-300">
+            <div class="hero-img-wrap" style="width:320px;height:320px;border-radius:50%;">
+              <img
+                src="Portfolio_pic/ChatGPT Image Apr 29, 2026, 10_16_44 AM.png" 
+  alt="Stella Marries"
+                alt="Stellamaries Syombua — Data Scientist and ML Engineer"
+                style="width:320px;height:320px;border-radius:50%;object-fit:cover;border:4px solid var(--bg-base);"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="flex flex-col items-center gap-2 absolute bottom-8 left-1/2 -translate-x-1/2" aria-hidden="true">
+          <span style="font-size:0.7rem;font-family:'JetBrains Mono',monospace;color:var(--text-muted);letter-spacing:0.1em;">SCROLL</span>
+          <div style="width:1px;height:40px;background:linear-gradient(180deg,var(--accent),transparent);animation:scrollPulse 2s ease infinite;"></div>
+        </div>
+        <style>@keyframes scrollPulse{0%,100%{opacity:0.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.1)}}</style>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         STATS COUNTER SECTION
+    ============================================================ -->
+    <section class="py-16 border-y" style="border-color:var(--border-sub);" aria-label="Key statistics">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <!-- Stat 1 -->
+          <div class="stat-card reveal">
+            <div style="font-family:'Poppins',sans-serif;font-weight:800;font-size:2.4rem;color:var(--accent);">
+              <span class="counter" data-target="5">0</span>+
+            </div>
+            <p style="font-size:0.85rem;color:var(--text-muted);margin-top:4px;">Projects Completed</p>
+          </div>
+          <!-- Stat 2 -->
+          <div class="stat-card reveal delay-100">
+            <div style="font-family:'Poppins',sans-serif;font-weight:800;font-size:2.4rem;color:var(--accent);">
+              <span class="counter" data-target="3">0</span>+
+            </div>
+            <p style="font-size:0.85rem;color:var(--text-muted);margin-top:4px;">Years Experience</p>
+          </div>
+          <!-- Stat 3 -->
+          <div class="stat-card reveal delay-200">
+            <div style="font-family:'Poppins',sans-serif;font-weight:800;font-size:2.4rem;color:var(--accent);">
+              <span class="counter" data-target="5">0</span>
+            </div>
+            <p style="font-size:0.85rem;color:var(--text-muted);margin-top:4px;">Certifications</p>
+          </div>
+          <!-- Stat 4 -->
+          <div class="stat-card reveal delay-300">
+            <div style="font-family:'Poppins',sans-serif;font-weight:800;font-size:2.4rem;color:var(--accent);">
+              <span class="counter" data-target="98">0</span>%
+            </div>
+            <p style="font-size:0.85rem;color:var(--text-muted);margin-top:4px;">Client Satisfaction</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ABOUT SECTION
+    ============================================================ -->
+    <section id="about" class="section-pad" aria-label="About me">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          <!-- Image collage -->
+          <div class="reveal order-last lg:order-first">
+            <div class="relative">
+              <img
+                src="Portfolio_pic/ChatGPT Image Apr 29, 2026, 10_36_47 AM.png"
+                alt="Stellamaries at work — data science lab environment"
+                style="border-radius:16px;width:100%;border:1px solid var(--border-sub);"
+              />
+              <!-- Floating badge -->
+              <div style="position:absolute;bottom:-20px;right:-20px;background:var(--bg-card);border:1px solid rgba(0,212,255,0.25);border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(0,0,0,0.4);">
+                <div style="width:44px;height:44px;border-radius:10px;background:rgba(0,212,255,0.1);display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--accent);">
+                  <i class="fa-solid fa-brain"></i>
+                </div>
+                <div>
+                  <div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:1rem;color:var(--text-main);">ML Research</div>
+                  <div style="font-size:0.75rem;color:var(--text-muted);">Published &amp; Applied</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Text -->
+          <div class="reveal delay-200">
+            <p class="section-label">// About Me</p>
+            <h2 class="section-heading">Where Data Becomes<br /><span class="accent-text">Better Decisions</span></h2>
+            <div class="section-divider"></div>
+
+            <p style="color:var(--text-muted);line-height:1.9;margin-bottom:1.25rem;">
+              I am a machine learning enthusiast and data analyst passionate about building systems that go beyond numbers to uncover meaningful patterns, tell clear stories, and support better decision making. My work focuses on data analysis and machine learning, where I explore datasets end to end, from cleaning and exploration to modelling and insight generation, ensuring the results are both accurate and actionable.
+
+            <p style="color:var(--text-muted);line-height:1.9;margin-bottom:2rem;">
+              With a background in biostatistics, I bring strong analytical and mathematical thinking to every problem I work on. I am experienced in predictive modelling, clustering, time series analysis, survival analysis, and dimensionality reduction, and I enjoy applying these methods to real world problems such as forecasting trends, identifying hidden structures in data, and understanding how complex systems evolve over time.
+            </p>
+            </p>
+
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2 mb-8">
+              <span class="tag"><i class="fa-solid fa-circle" style="font-size:5px;"></i> Python</span>
+              <span class="tag"><i class="fa-solid fa-circle" style="font-size:5px;"></i> R</span>
+              <span class="tag"><i class="fa-solid fa-circle" style="font-size:5px;"></i> STATA</span>
+              <span class="tag"><i class="fa-solid fa-circle" style="font-size:5px;"></i> SAS</span>
+              <span class="tag"><i class="fa-solid fa-circle" style="font-size:5px;"></i> SQL</span>
+              <span class="tag"><i class="fa-solid fa-circle" style="font-size:5px;"></i> Power BI</span>
+              <span class="tag"><i class="fa-solid fa-circle" style="font-size:5px;"></i> Azure ML</span>
+              <span class="tag"><i class="fa-solid fa-circle" style="font-size:5px;"></i> SPSS</span>
+            </div>
+
+            <div class="flex gap-4">
+              <a href="#contact" class="btn-primary"><i class="fa-regular fa-envelope"></i> Let's Talk</a>
+              <a href="#resume"  class="btn-outline"><i class="fa-solid fa-file-lines"></i> My Resume</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SKILLS SECTION
+    ============================================================ -->
+    <section id="skills" class="section-pad" style="background:rgba(255,255,255,0.01);border-top:1px solid var(--border-sub);border-bottom:1px solid var(--border-sub);" aria-label="Skills">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 reveal">
+          <p class="section-label">// Technical Expertise</p>
+          <h2 class="section-heading">Skills &amp; <span class="accent-text">Technologies</span></h2>
+          <div class="section-divider mx-auto"></div>
+          <p style="color:var(--text-muted);max-width:520px;margin:0 auto;font-size:0.95rem;">
+            A practical toolkit built through hands-on experience in data analysis, biostatistics, and machine learning, focused on extracting insights from data and supporting decision making.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Skill Group 1 -->
+          <div class="card p-6 reveal">
+            <div class="flex items-center gap-3 mb-5">
+              <div class="service-icon" style="width:42px;height:42px;border-radius:10px;font-size:1.1rem;margin-bottom:0;">
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+              <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:1rem;color:var(--text-main);">Programming & Data Handling</h3>
+            </div>
+            <div class="flex flex-col gap-4">
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span style="font-size:0.8rem;color:var(--text-muted);">Python (Pandas / NumPy)</span>
+                  <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">60%</span>
+                </div>
+                <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="60"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span style="font-size:0.8rem;color:var(--text-muted);">SQL &amp; Database Querying</span>
+                  <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">70%</span>
+                </div>
+                <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="70"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span style="font-size:0.8rem;color:var(--text-muted);">Data Cleaning and Preparation</span>
+                  <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">90%</span>
+                </div>
+                <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="90"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skill Group 2 -->
+<div class="card p-6 reveal delay-100">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="service-icon" style="width:42px;height:42px;border-radius:10px;font-size:1.1rem;margin-bottom:0;">
+      <i class="fa-solid fa-robot"></i>
+    </div>
+    <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:1rem;color:var(--text-main);">Machine Learning</h3>
+  </div>
+
+  <div class="flex flex-col gap-4">
+
+    <div>
+      <div class="flex justify-between mb-1">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Scikit-learn</span>
+        <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">90%</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="90"></div></div>
+    </div>
+
+    <div>
+      <div class="flex justify-between mb-1">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Predictive Modeling</span>
+        <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">89%</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="89"></div></div>
+    </div>
+
+    <div>
+      <div class="flex justify-between mb-1">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Clustering Analysis</span>
+        <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">86%</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="86"></div></div>
+    </div>
+
+    <div>
+      <div class="flex justify-between mb-1">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Time Series Analysis</span>
+        <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">85%</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="85"></div></div>
+    </div>
+
+    <div>
+      <div class="flex justify-between mb-1">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Survival Analysis</span>
+        <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">83%</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="83"></div></div>
+    </div>
+
+    <div>
+      <div class="flex justify-between mb-1">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Dimensionality Reduction</span>
+        <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">84%</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="84"></div></div>
+    </div>
+
+  </div>
+</div>
+
+          <!-- Skill Group 3 -->
+<div class="card p-6 reveal delay-200">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="service-icon" style="width:42px;height:42px;border-radius:10px;font-size:1.1rem;margin-bottom:0;">
+      <i class="fa-solid fa-eye"></i>
+    </div>
+    <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:1rem;color:var(--text-main);">Statistical Analysis</h3>
+  </div>
+
+  <div class="flex flex-col gap-4">
+
+    <div>
+      <div class="flex justify-between mb-1">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Exploratory Data Analysis</span>
+        <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">92%</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="92"></div></div>
+    </div>
+
+    <div>
+      <div class="flex justify-between mb-1">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Hypothesis Testing</span>
+        <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">90%</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="90"></div></div>
+    </div>
+
+    <div>
+      <div class="flex justify-between mb-1">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Regression Analysis</span>
+        <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">91%</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="91"></div></div>
+    </div>
+
+    <div>
+      <div class="flex justify-between mb-1">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Biostatistical Methods</span>
+        <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">88%</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="88"></div></div>
+    </div>
+
+  </div>
+</div>
+
+          <!-- Skill Group 4 -->
+<div class="card p-6 reveal delay-300">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="service-icon" style="width:42px;height:42px;border-radius:10px;font-size:1.1rem;margin-bottom:0;">
+      <i class="fa-solid fa-eye"></i>
+    </div>
+    <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:1rem;color:var(--text-main);">Data Visualization & Reporting</h3>
+  </div>
+
+  <div class="flex flex-col gap-4">
+
+    <div>
+      <div class="flex justify-between mb-1">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Power BI</span>
+        <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">90%</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="90"></div></div>
+    </div>
+
+    <div>
+      <div class="flex justify-between mb-1">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Matplotlib</span>
+        <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">93%</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="93"></div></div>
+    </div>
+
+    <div>
+      <div class="flex justify-between mb-1">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Seaborn</span>
+        <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">92%</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="92"></div></div>
+    </div>
+
+    <div>
+      <div class="flex justify-between mb-1">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Plotly</span>
+        <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">88%</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="88"></div></div>
+    </div>
+
+    <div>
+      <div class="flex justify-between mb-1">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Dashboard Design and Reporting</span>
+        <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">89%</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="89"></div></div>
+    </div>
+
+  </div>
+</div>
+
+          <!-- Skill Group 5 -->
+<div class="card p-6 reveal delay-400">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="service-icon" style="width:42px;height:42px;border-radius:10px;font-size:1.1rem;margin-bottom:0;">
+      <i class="fa-solid fa-eye"></i>
+    </div>
+    <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:1rem;color:var(--text-main);">Mathematical & Analytical Foundations</h3>
+  </div>
+
+  <div class="flex flex-col gap-4">
+
+    <div>
+      <div class="flex justify-between mb-1">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Probability Concepts</span>
+        <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">90%</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="90"></div></div>
+    </div>
+
+    <div>
+      <div class="flex justify-between mb-1">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Statistical Inference</span>
+        <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">89%</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="89"></div></div>
+    </div>
+
+    <div>
+      <div class="flex justify-between mb-1">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Applied Biostatistics</span>
+        <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">88%</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="88"></div></div>
+    </div>
+
+    <div>
+      <div class="flex justify-between mb-1">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Data Interpretation</span>
+        <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">91%</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="91"></div></div>
+    </div>
+
+  </div>
+</div>
+
+          <!-- Skill Group 6 -->
+<div class="card p-6 reveal delay-500">
+  <div class="flex items-center gap-3 mb-5">
+    <div class="service-icon" style="width:42px;height:42px;border-radius:10px;font-size:1.1rem;margin-bottom:0;">
+      <i class="fa-solid fa-eye"></i>
+    </div>
+    <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:1rem;color:var(--text-main);">Domain Focus</h3>
+  </div>
+
+  <div class="flex flex-col gap-4">
+
+    <div>
+      <div class="flex justify-between mb-1">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Healthcare & Biostatistics Applications</span>
+        <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">92%</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="92"></div></div>
+    </div>
+
+    <div>
+      <div class="flex justify-between mb-1">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Real-world Data Analysis Projects</span>
+        <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">90%</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="90"></div></div>
+    </div>
+
+    <div>
+      <div class="flex justify-between mb-1">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Decision-focused Analytics</span>
+        <span style="font-size:0.8rem;color:var(--accent);font-family:'JetBrains Mono',monospace;">91%</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar-fill" data-width="91"></div></div>
+    </div>
+
+  </div>
+</div>
+    </section>
+
+    <!-- ============================================================
+         FEATURED PROJECTS
+    ============================================================ -->
+    <section id="projects" class="section-pad" aria-label="Featured projects">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 reveal">
+          <p class="section-label">// Featured Work</p>
+          <h2 class="section-heading">Applied Machine Learning <span class="accent-text">& Data Analytics Projects</span></h2>
+          <div class="section-divider mx-auto"></div>
+          <p style="color:var(--text-muted);max-width:520px;margin:0 auto;font-size:0.95rem;">
+            A selection of data science and machine learning projects built to solve real-world problems through prediction, classification, and statistical analysis, with a strong focus on turning data into actionable insights.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Project 1 -->
+<article class="card reveal" aria-label="Patient Risk Prediction project">
+  <div class="project-img">
+    <img src="Portfolio_pic/risk_02_tier_segmentation.png" alt="Patient risk prediction system" data-lightbox="true"/>
+  </div>
+  <div class="p-6">
+    <div class="flex flex-wrap gap-2 mb-3">
+      <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Scikit-learn</span>
+    </div>
+    <h3> Patient Risk Prediction System</h3>
+    <p>
+      End-to-end predictive pipeline classifying patient risk using structured clinical data, including preprocessing, EDA, and model evaluation.
+    </p>
+    <div class="flex gap-3">
+      <a href="https://github.com/Stellamarries-Syombua/patient-risk-prediction" class="btn-outline"><i class="fa-brands fa-github"></i> Code</a>
+      <a href="#" class="btn-primary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
+    </div>
+  </div>
+</article>
+
+<!-- Project 2 -->
+<article class="card reveal delay-100" aria-label="Survival analysis project">
+  <div class="project-img">
+    <img src="Portfolio_pic/survival_analysis_dashboard.png" alt="Survival analysis dashboard" data-lightbox="true"/>
+  </div>
+  <div class="p-6">
+    <div class="flex flex-wrap gap-2 mb-3">
+      <span class="tag">Python</span><span class="tag">Lifelines</span><span class="tag">Statistics</span>
+    </div>
+    <h3> Disease Outcome Survival Analysis</h3>
+    <p>
+      Kaplan-Meier and Cox models used to estimate survival probabilities and interpret clinical risk factors over time.
+    </p>
+    <div class="flex gap-3">
+      <a href="https://github.com/Stellamarries-Syombua/disease-survival-analysis" class="btn-outline">Code</a>
+      <a href="#" class="btn-primary">Demo</a>
+    </div>
+  </div>
+</article>
+
+<!-- Project 3 -->
+<article class="card reveal delay-200" aria-label="Readmission analytics project">
+  <div class="project-img">
+    <img src="Portfolio_pic/Target_Distribution.png" alt="Hospital readmission analytics" data-lightbox="true"/>
+  </div>
+  <div class="p-6">
+    <div class="flex flex-wrap gap-2 mb-3">
+      <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Power BI</span>
+    </div>
+    <h3> Hospital Readmission Risk Analytics</h3>
+    <p>
+      Identified readmission drivers and built predictive models with dashboards for healthcare decision-making.
+    </p>
+    <div class="flex gap-3">
+      <a href="https://github.com/Stellamarries-Syombua/redmission_model_data" class="btn-outline">Code</a>
+      <a href="#" class="btn-primary">Dashboard</a>
+    </div>
+  </div>
+</article>
+
+<!-- Project 4 -->
+<article class="card reveal delay-300" aria-label="Maternal health analysis">
+  <div class="project-img">
+    <img src="Portfolio_pic/variable dist.png" alt="Maternal health analytics" data-lightbox="true"/>
+  </div>
+  <div class="p-6">
+    <div class="flex flex-wrap gap-2 mb-3">
+      <span class="tag">R</span><span class="tag">tidyr</span><span class="tag">Regression</span>
+    </div>
+    <h3> Maternal Health Risk Analysis</h3>
+    <p>
+      Regression-based analysis identifying key maternal risk factors and generating actionable health insights.
+    </p>
+    <div class="flex gap-3">
+      <a href="https://github.com/Stellamarries-Syombua/Maternal_Health_Risk/tree/main" class="btn-outline">Code</a>
+      <a href="#" class="btn-primary">Report</a>
+    </div>
+  </div>
+</article>
+
+<!-- Project 5 -->
+<article class="card reveal delay-400" aria-label="Clinical data analytics">
+  <div class="project-img">
+    <img src="Portfolio_pic/Heart_disease.png" alt="Clinical data analytics pipeline" data-lightbox="true"/>
+  </div>
+  <div class="p-6">
+    <div class="flex flex-wrap gap-2 mb-3">
+      <span class="tag">R</span><span class="tag">dplyr</span><span class="tag">ggplot2</span>
+    </div>
+    <h3> Clinical Data Exploratory Analytics Pipeline</h3>
+    <p>
+      Data cleaning, hypothesis testing, and visualization pipeline to uncover trends in clinical datasets.
+    </p>
+    <div class="flex gap-3">
+      <a href="https://github.com/Stellamarries-Syombua/Clinical_EDA_Pipeline" class="btn-outline">Code</a>
+      <a href="#" class="btn-primary">Report</a>
+    </div>
+  </div>
+</article>
+<!-- Project 6 -->
+<article class="card reveal delay-400" aria-label="Clinical data analytics">
+  <div class="project-img">
+    <img src="Portfolio_pic/Molecular_Subtypes.png" alt="Breast Cancer Molecular Subtypes-Kenya" data-lightbox="true"/>
+  </div>
+  <div class="p-6">
+    <div class="flex flex-wrap gap-2 mb-3">
+      <span class="tag">R</span><span class="tag">stringr</span><span class="tag">purr</span>
+    </div>
+    <h3> Breast Cancer Molecular Subtypes Analysis</h3>
+    <p>
+      Analysis of molecular subtypes in breast cancer datasets to inform personalized treatment strategies.
+    </p>
+    <div class="flex gap-3">
+      <a href="#" class="btn-outline">Code</a>
+      <a href="#" class="btn-primary">Report</a>
+    </div>
+  </div>
+</article>
+        </div>
+
+        <div class="text-center mt-10 reveal">
+          <a href="https://github.com" target="_blank" rel="noopener" class="btn-outline">
+            <i class="fa-brands fa-github"></i> View All on GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+     SERVICES SECTION
+============================================================ -->
+<section id="services" class="section-pad" style="background:rgba(255,255,255,0.01);border-top:1px solid var(--border-sub);border-bottom:1px solid var(--border-sub);" aria-label="Services">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+      <p class="section-label">// What I Offer</p>
+      <h2 class="section-heading">Services &amp; <span class="accent-text">Capabilities</span></h2>
+      <div class="section-divider mx-auto"></div>
+      <p style="color:var(--text-muted);max-width:520px;margin:0 auto;font-size:0.95rem;">
+        Data science and analytics services covering data preparation, statistical analysis, machine learning, and insight delivery to support practical decision making.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="card p-7 reveal">
+        <div class="service-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+        <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:1.05rem;color:var(--text-main);margin-bottom:0.5rem;">Exploratory Data Analysis</h3>
+        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7;">Deep-dive EDA, data profiling, and actionable insight reports that reveal hidden patterns and business opportunities in your existing data assets.</p>
+      </div>
+      <div class="card p-7 reveal delay-100">
+        <div class="service-icon"><i class="fa-solid fa-gears"></i></div>
+        <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:1.05rem;color:var(--text-main);margin-bottom:0.5rem;">Predictive Modeling</h3>
+        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7;">Custom regression, classification, and forecasting models designed to improve decision-making, reduce risk, and anticipate future trends with confidence.</p>
+      </div>
+      <div class="card p-7 reveal delay-200">
+        <div class="service-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+        <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:1.05rem;color:var(--text-main);margin-bottom:0.5rem;">Clinical &amp; Health Data Analysis</h3>
+        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7;">Analysis of health and clinical datasets with attention to data quality, patient-level patterns, and statistical rigour, producing outputs that are meaningful to both research teams and decision makers.</p>
+      </div>
+      <div class="card p-7 reveal delay-300">
+        <div class="service-icon"><i class="fa-solid fa-chart-pie"></i></div>
+        <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:1.05rem;color:var(--text-main);margin-bottom:0.5rem;">Dashboard &amp; Visualization</h3>
+        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7;">Interactive Power BI, Tableau, and Plotly Dash dashboards that make complex data instantly understandable for executive and operational audiences.</p>
+      </div>
+      <div class="card p-7 reveal delay-400">
+        <div class="service-icon"><i class="fa-solid fa-database"></i></div>
+        <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:1.05rem;color:var(--text-main);margin-bottom:0.5rem;">Research Support &amp; Data Collection Design</h3>
+        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7;">Supporting researchers with data collection tool setup using KoboToolbox and CommCare, methodology structuring, and turning raw research data into clean, analysable datasets.</p>
+      </div>
+      <div class="card p-7 reveal delay-500">
+        <div class="service-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+        <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:1.05rem;color:var(--text-main);margin-bottom:0.5rem;">Training &amp; Consulting</h3>
+        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7;">Hands-on workshops, data strategy consulting, and capacity building for teams transitioning to data-driven decision-making practices.</p>
+      </div>
+    </div>
+  </div>
+</section>
+    <!-- ============================================================
+         CASE STUDIES
+    ============================================================ -->
+    <section id="case-studies" class="section-pad" aria-label="Case studies">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 reveal">
+          <p class="section-label">// Deep Dives</p>
+          <h2 class="section-heading">Case <span class="accent-text">Studies</span></h2>
+          <div class="section-divider mx-auto"></div>
+          <p style="color:var(--text-muted);max-width:520px;margin:0 auto;font-size:0.95rem;">
+            Step-by-step breakdowns of data challenges, including the analytical approach, modelling techniques, and the results that informed decision making.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+          <!-- Case Study 2 -->
+<div class="card overflow-visible reveal" style="position:relative;">
+  <img
+    src="https://picsum.photos/seed/casestudy2/700/280"
+    alt="Patient risk prediction case study"
+    style="border-radius:14px 14px 0 0;width:100%;height:200px;object-fit:cover;"
+  />
+  <div class="p-7">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--accent);letter-spacing:0.12em;text-transform:uppercase;">Machine Learning · Healthcare</span>
+    <h3 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:1.2rem;color:var(--text-main);margin:0.5rem 0 0.75rem;">Patient Risk Prediction System</h3>
+    <p style="font-size:0.87rem;color:var(--text-muted);line-height:1.8;margin-bottom:1.5rem;">
+      End-to-end ML pipeline classifying diabetes risk from structured clinical data. Covers the full data science lifecycle; from raw data auditing and EDA through model selection, threshold tuning, and SHAP explainability.
+    </p>
+    <!-- Timeline of steps -->
+    <div class="relative pl-8">
+      <div class="timeline-line"></div>
+      <div class="flex flex-col gap-5">
+        <div class="flex gap-3 items-start">
+          <div class="timeline-dot absolute left-3"></div>
+          <div style="padding-left:8px;">
+            <div style="font-weight:600;font-size:0.85rem;color:var(--text-main);">Data Auditing & EDA</div>
+            <div style="font-size:0.8rem;color:var(--text-muted);">Identified zeros, outliers, and a 48.7% missing rate in insulin — critical gap for real-world deployment.</div>
+          </div>
+        </div>
+        <div class="flex gap-3 items-start">
+          <div class="timeline-dot absolute left-3" style="margin-top:84px;"></div>
+          <div style="padding-left:8px;">
+            <div style="font-weight:600;font-size:0.85rem;color:var(--text-main);">Model Training & Selection</div>
+            <div style="font-size:0.8rem;color:var(--text-muted);">Compared Logistic Regression, Random Forest, and Gradient Boosting; GBM selected with AUC 0.821.</div>
+          </div>
+        </div>
+        <div class="flex gap-3 items-start">
+          <div class="timeline-dot absolute left-3" style="margin-top:168px;"></div>
+          <div style="padding-left:8px;">
+            <div style="font-weight:600;font-size:0.85rem;color:var(--text-main);">Explainability & Risk Tiers</div>
+            <div style="font-size:0.8rem;color:var(--text-muted);">SHAP values rank glucose as #1 predictor. Threshold tuned to 0.35 to prioritise clinical recall.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex gap-4 mt-5">
+      <div style="text-align:center;flex:1;background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px;">
+        <div style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:var(--accent);">0.821</div>
+        <div style="font-size:0.72rem;color:var(--text-muted);">ROC-AUC</div>
+      </div>
+      <div style="text-align:center;flex:1;background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px;">
+        <div style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:var(--accent);">75.3%</div>
+        <div style="font-size:0.72rem;color:var(--text-muted);">Accuracy</div>
+      </div>
+      <div style="text-align:center;flex:1;background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px;">
+        <div style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:var(--accent);">0.627</div>
+        <div style="font-size:0.72rem;color:var(--text-muted);">F1 Score</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+          <!-- Case Study 2 -->
+<div class="card overflow-visible reveal delay-200">
+  <img
+    src="https://picsum.photos/seed/casestudy2/700/280"
+    alt="Breast cancer molecular subtype analysis case study"
+    style="border-radius:14px 14px 0 0;width:100%;height:200px;object-fit:cover;"
+  />
+  <div class="p-7">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--accent);letter-spacing:0.12em;text-transform:uppercase;">Clinical Data Analysis · Kenya</span>
+    <h3 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:1.2rem;color:var(--text-main);margin:0.5rem 0 0.75rem;">Breast Cancer Molecular Subtype Distribution</h3>
+    <p style="font-size:0.87rem;color:var(--text-muted);line-height:1.8;margin-bottom:1.5rem;">
+      Analysed IHC marker data from 167 breast cancer patients across 3 Kenyan hospital sites (TACA Study) to characterise molecular subtype distribution; finding 19.4% Triple Negative prevalence in a population with limited prior profiling.
+    </p>
+    <div class="relative pl-8">
+      <div class="timeline-line"></div>
+      <div class="flex flex-col gap-5">
+        <div class="flex gap-3 items-start">
+          <div class="timeline-dot absolute left-3"></div>
+          <div style="padding-left:8px;">
+            <div style="font-weight:600;font-size:0.85rem;color:var(--text-main);">Data Preparation & IHC Filtering</div>
+            <div style="font-size:0.8rem;color:var(--text-muted);">Filtered 167 DSQ participants to 144 IHC records across Kenya-KTRH, MERU, and NTRH.</div>
+          </div>
+        </div>
+        <div class="flex gap-3 items-start">
+          <div class="timeline-dot absolute left-3" style="margin-top:84px;"></div>
+          <div style="padding-left:8px;">
+            <div style="font-weight:600;font-size:0.85rem;color:var(--text-main);">Molecular Subtype Classification</div>
+            <div style="font-size:0.8rem;color:var(--text-muted);">Classified 134 patients into 5 subtypes using ER, PR, and HER2 IHC surrogate markers.</div>
+          </div>
+        </div>
+        <div class="flex gap-3 items-start">
+          <div class="timeline-dot absolute left-3" style="margin-top:168px;"></div>
+          <div style="padding-left:8px;">
+            <div style="font-weight:600;font-size:0.85rem;color:var(--text-main);">Cross-Site Analysis & Completeness Audit</div>
+            <div style="font-size:0.8rem;color:var(--text-muted);">Stratified subtype distributions by site and audited IHC data completeness (88–95%) per hospital.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex gap-4 mt-5">
+      <div style="text-align:center;flex:1;background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px;">
+        <div style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:var(--accent);">167</div>
+        <div style="font-size:0.72rem;color:var(--text-muted);">Patients · 3 Sites</div>
+      </div>
+      <div style="text-align:center;flex:1;background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px;">
+        <div style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:var(--accent);">19.4%</div>
+        <div style="font-size:0.72rem;color:var(--text-muted);">Triple Negative Rate</div>
+      </div>
+      <div style="text-align:center;flex:1;background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px;">
+        <div style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1.4rem;color:var(--accent);">91.3%</div>
+        <div style="font-size:0.72rem;color:var(--text-muted);">Data Completeness</div>
+      </div>
+    </div>
+  </div>
+</div>
+    </section>
+<!-- ============================================================
+     CERTIFICATIONS
+============================================================ -->
+<section id="certifications" class="section-pad" style="background:rgba(255,255,255,0.01);border-top:1px solid var(--border-sub);border-bottom:1px solid var(--border-sub);" aria-label="Certifications">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid lg:grid-cols-2 gap-16 items-start">
+      <div class="reveal">
+        <p class="section-label">// Credentials</p>
+        <h2 class="section-heading">Certifications &amp;<br /><span class="accent-text">Achievements</span></h2>
+        <div class="section-divider"></div>
+        <p style="color:var(--text-muted);line-height:1.8;max-width:440px;">
+          Continuous learning is central to my work. These certifications reflect hands-on training across data analysis, mobile data collection, and full stack development.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-4 reveal delay-200">
+
+        <div class="cert-card">
+          <div class="cert-icon"><i class="fa-solid fa-code"></i></div>
+          <div>
+            <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.95rem;color:var(--text-main);">Full Stack Development Internship Program</div>
+            <div style="font-size:0.78rem;color:var(--text-muted);margin-top:2px;">Edureka · Jul 2025</div>
+          </div>
+          <span class="tag ml-auto" style="flex-shrink:0;">Attended</span>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon"><i class="fa-solid fa-chart-bar"></i></div>
+          <div>
+            <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.95rem;color:var(--text-main);">Power BI Beginner to Pro Workshop</div>
+            <div style="font-size:0.78rem;color:var(--text-muted);margin-top:2px;">Pragmatic Works · Feb 2024</div>
+          </div>
+          <span class="tag ml-auto" style="flex-shrink:0;">Completed</span>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon"><i class="fa-solid fa-flask"></i></div>
+          <div>
+            <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.95rem;color:var(--text-main);">Introduction to Data Analysis using R and SPSS</div>
+            <div style="font-size:0.78rem;color:var(--text-muted);margin-top:2px;">AMREC Consultants · May – Aug 2023</div>
+          </div>
+          <span class="tag ml-auto" style="flex-shrink:0;">Completed</span>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+          <div>
+            <div style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.95rem;color:var(--text-main);">Proposal Writing & Mobile Data Collection (CommCare & KoboToolbox)</div>
+            <div style="font-size:0.78rem;color:var(--text-muted);margin-top:2px;">AMREC Consultants · May – Aug 2023</div>
+          </div>
+          <span class="tag ml-auto" style="flex-shrink:0;">Completed</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- ============================================================
+     TESTIMONIALS
+============================================================ -->
+<section id="testimonials" class="section-pad" aria-label="Testimonials">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+      <p class="section-label">// Client Feedback</p>
+      <h2 class="section-heading">What People <span class="accent-text">Say</span></h2>
+      <div class="section-divider mx-auto"></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Testimonial 1 -->
+      <blockquote class="testimonial-card reveal">
+        <div class="quote-mark">"</div>
+        <div class="flex gap-1 mb-4" aria-label="5 stars">
+          <i class="fa-solid fa-star" style="color:#f59e0b;font-size:0.8rem;"></i>
+          <i class="fa-solid fa-star" style="color:#f59e0b;font-size:0.8rem;"></i>
+          <i class="fa-solid fa-star" style="color:#f59e0b;font-size:0.8rem;"></i>
+          <i class="fa-solid fa-star" style="color:#f59e0b;font-size:0.8rem;"></i>
+          <i class="fa-solid fa-star" style="color:#f59e0b;font-size:0.8rem;"></i>
+        </div>
+        <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.8;margin-bottom:1.5rem;padding-top:1rem;">
+          I was stuck at so many points in my research and Stellamaries just had this way of sitting with the problem with me rather than just handing me answers. She helped me think through my methodology and make sense of my R outputs in a way that actually stuck. I came out of it feeling like I'd genuinely learned something, not just gotten through it.
+        </p>
+        <footer style="display:flex;align-items:center;gap:12px;">
+          <img src="https://picsum.photos/seed/t1/40/40" alt="Lilian Kabuku" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--border-sub);" />
+          <div>
+            <cite style="font-style:normal;font-weight:600;font-size:0.88rem;color:var(--text-main);">Lilian Kabuku</cite>
+            <div style="font-size:0.75rem;color:var(--text-muted);">Postgraduate Researcher</div>
+          </div>
+        </footer>
+      </blockquote>
+
+      <!-- Testimonial 2 -->
+      <blockquote class="testimonial-card reveal delay-200">
+        <div class="quote-mark">"</div>
+        <div class="flex gap-1 mb-4" aria-label="5 stars">
+          <i class="fa-solid fa-star" style="color:#f59e0b;font-size:0.8rem;"></i>
+          <i class="fa-solid fa-star" style="color:#f59e0b;font-size:0.8rem;"></i>
+          <i class="fa-solid fa-star" style="color:#f59e0b;font-size:0.8rem;"></i>
+          <i class="fa-solid fa-star" style="color:#f59e0b;font-size:0.8rem;"></i>
+          <i class="fa-solid fa-star" style="color:#f59e0b;font-size:0.8rem;"></i>
+        </div>
+        <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.8;margin-bottom:1.5rem;padding-top:1rem;">
+Stellamaries reached out when she was working through some tricky R issues and what started as a quick back and forth turned into a proper collaboration. She picks things up fast, asks the right questions, and brings a level of curiosity to the work that makes the whole conversation better. I've genuinely enjoyed working through problems together.        </p>
+        <footer style="display:flex;align-items:center;gap:12px;">
+          <img src="https://picsum.photos/seed/t2/40/40" alt="Kennedy Kyalo" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--border-sub);" />
+          <div>
+            <cite style="font-style:normal;font-weight:600;font-size:0.88rem;color:var(--text-main);">Kennedy Kyalo</cite>
+            <div style="font-size:0.75rem;color:var(--text-muted);">Data Analyst & Collaborator</div>
+          </div>
+        </footer>
+      </blockquote>
+
+      <!-- Testimonial 3 -->
+      <blockquote class="testimonial-card reveal delay-400">
+        <div class="quote-mark">"</div>
+        <div class="flex gap-1 mb-4" aria-label="5 stars">
+          <i class="fa-solid fa-star" style="color:#f59e0b;font-size:0.8rem;"></i>
+          <i class="fa-solid fa-star" style="color:#f59e0b;font-size:0.8rem;"></i>
+          <i class="fa-solid fa-star" style="color:#f59e0b;font-size:0.8rem;"></i>
+          <i class="fa-solid fa-star" style="color:#f59e0b;font-size:0.8rem;"></i>
+          <i class="fa-solid fa-star" style="color:#f59e0b;font-size:0.8rem;"></i>
+        </div>
+        <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.8;margin-bottom:1.5rem;padding-top:1rem;">
+Stellamaries was a genuinely engaged participant throughout the program. You could tell she wasn't just there to get a certificate; she was thinking about how to apply what she was learning to actual work she cared about. That kind of motivation makes for great classroom energy and it was good to have her with us        </p>
+        <footer style="display:flex;align-items:center;gap:12px;">
+          <img src="https://picsum.photos/seed/t3/40/40" alt="Linda Kaino" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--border-sub);" />
+          <div>
+            <cite style="font-style:normal;font-weight:600;font-size:0.88rem;color:var(--text-main);">Linda Kaino</cite>
+            <div style="font-size:0.75rem;color:var(--text-muted);">Trainer, AMREC Consultants</div>
+          </div>
+        </footer>
+      </blockquote>
+
+    </div>
+  </div>
+</section>
+
+    <!-- ============================================================
+         RESUME DOWNLOAD
+    ============================================================ -->
+    <section id="resume" class="section-pad" style="border-top:1px solid var(--border-sub);" aria-label="Resume download">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="card glow-box p-10 md:p-14 text-center reveal" style="background:linear-gradient(135deg,rgba(0,212,255,0.05),rgba(0,150,200,0.02));">
+          <div style="width:70px;height:70px;border-radius:18px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:1.8rem;color:var(--accent);">
+            <i class="fa-solid fa-file-lines"></i>
+          </div>
+          <h2 class="section-heading mb-3">Download My <span class="accent-text">Resume</span></h2>
+          <p style="color:var(--text-muted);max-width:500px;margin:0 auto 2rem;font-size:0.95rem;line-height:1.7;">
+            Get a clear overview of my experience, education, projects, and skills in a structured format.
+          </p>
+          <div class="flex flex-wrap gap-4 justify-center">
+            <a href="Updated_Cv (2).pdf" class="btn-primary" download aria-label="Download resume as PDF">
+              <i class="fa-solid fa-file-pdf"></i> Download PDF
+            </a>
+            <a href="Updated_Cv (2).pdf" target="_blank" class="btn-outline" aria-label="View resume online">
+              <i class="fa-solid fa-eye"></i> View Online
+            </a>
+          </div>
+          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:1.5rem;font-family:'JetBrains Mono',monospace;">
+            Last updated: April 2026 · PDF · 2 page
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT FORM
+    ============================================================ -->
+    <section id="contact" class="section-pad" style="background:rgba(255,255,255,0.01);border-top:1px solid var(--border-sub);" aria-label="Contact">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-16">
+          <!-- Info side -->
+          <div class="reveal">
+            <p class="section-label">// Get In Touch</p>
+            <h2 class="section-heading">Let's Build Something<br /><span class="accent-text">Together</span></h2>
+            <div class="section-divider"></div>
+            <p style="color:var(--text-muted);line-height:1.8;margin-bottom:2.5rem;max-width:440px;">
+              Whether it’s a data problem, a new project, or a conversation about ideas, I’d be glad to connect. I typically reply within 24 hours.
+            </p>
+
+            <div class="flex flex-col gap-5">
+              <div style="display:flex;align-items:center;gap:14px;">
+                <div class="service-icon" style="width:44px;height:44px;border-radius:12px;font-size:1rem;margin-bottom:0;flex-shrink:0;">
+                  <i class="fa-regular fa-envelope"></i>
+                </div>
+                <div>
+                  <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:2px;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;">EMAIL</div>
+                  <a href="mailto:stellamarriessyombua@gmail.com" style="color:var(--text-main);font-size:0.9rem;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-main)'">stellamarriessyombua@gmail.com</a>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px;">
+                <div class="service-icon" style="width:44px;height:44px;border-radius:12px;font-size:1rem;margin-bottom:0;flex-shrink:0;">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div>
+                  <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:2px;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;">LOCATION</div>
+                  <span style="color:var(--text-main);font-size:0.9rem;">Nairobi, Kenya · Open to Remote</span>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px;">
+                <div class="service-icon" style="width:44px;height:44px;border-radius:12px;font-size:1rem;margin-bottom:0;flex-shrink:0;">
+                  <i class="fa-solid fa-clock"></i>
+                </div>
+                <div>
+                  <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:2px;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;">RESPONSE TIME</div>
+                  <span style="color:var(--text-main);font-size:0.9rem;">Within 24 hours</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social links -->
+            <div class="flex gap-3 mt-8">
+              <a href="https://github.com" target="_blank" rel="noopener" class="social-btn" aria-label="GitHub profile">
+                <i class="fa-brands fa-github"></i>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-btn" aria-label="LinkedIn profile">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </a>
+              <a href="https://kaggle.com" target="_blank" rel="noopener" class="social-btn" aria-label="Kaggle profile" style="font-size:0.85rem;font-weight:700;font-family:'Poppins',sans-serif;">
+                K
+              </a>
+              <a href="https://orcid.org/0009-0000-4126-2662" target="_blank" rel="noopener" class="social-btn" aria-label="ORCID profile">
+                <i class="fa-brands fa-orcid"></i>
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener" class="social-btn" aria-label="Twitter/X profile">
+                <i class="fa-brands fa-x-twitter"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Contact Form - Formspree -->
+<div class="reveal delay-300">
+  <form 
+    id="contact-form"
+    class="card p-8 flex flex-col gap-5"
+  >
+  >
+    <div class="grid sm:grid-cols-2 gap-5">
+      <div>
+        <label for="name" class="form-label">Full Name <span style="color:#ff4d4d;">*</span></label>
+        <input type="text" id="name" name="name" class="form-input" placeholder="Your name" autocomplete="name" required />
+        <span class="error-msg" id="name-error">Please enter your name.</span>
+      </div>
+      <div>
+        <label for="email" class="form-label">Email Address <span style="color:#ff4d4d;">*</span></label>
+        <input type="email" id="email" name="email" class="form-input" placeholder="you@example.com" autocomplete="email" required />
+        <span class="error-msg" id="email-error">Please enter a valid email.</span>
+      </div>
+    </div>
+    <div>
+      <label for="subject" class="form-label">Subject <span style="color:#ff4d4d;">*</span></label>
+      <input type="text" id="subject" name="subject" class="form-input" placeholder="What's this about?" required />
+      <span class="error-msg" id="subject-error">Please enter a subject.</span>
+    </div>
+    <div>
+      <label for="service" class="form-label">Service Interested In</label>
+      <select id="service" name="service" class="form-input">
+        <option value="" disabled selected>Select a service…</option>
+        <option value="Exploratory Data Analysis">📊 Exploratory Data Analysis</option>
+        <option value="Predictive Modeling">🤖 Predictive Modeling</option>
+        <option value="AI System Development">🧠 AI System Development</option>
+        <option value="Dashboard & Visualization">📈 Dashboard & Visualization</option>
+        <option value="Data Pipeline Engineering">🔧 Data Pipeline Engineering</option>
+        <option value="Training & Consulting">🎓 Training & Consulting</option>
+        <option value="Other">❓ Other</option>
+      </select>
+    </div>
+    <div>
+      <label for="message" class="form-label">Message <span style="color:#ff4d4d;">*</span></label>
+      <textarea id="message" name="message" class="form-input" rows="5" placeholder="Tell me about your project or question…" required style="resize:vertical;min-height:120px;"></textarea>
+      <span class="error-msg" id="message-error">Please enter a message (min 20 characters).</span>
+    </div>
+    
+    <button type="submit" class="btn-primary w-full justify-center" id="submit-btn">
+      <i class="fa-solid fa-paper-plane"></i>
+      <span id="submit-text">Send Message</span>
+    </button>
+    <div id="form-status" style="font-size:0.8rem;text-align:center;margin-top:0.5rem;display:none;"></div>
+  </form>
+</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="pt-16 pb-8" aria-label="Footer">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <!-- Col 1: About -->
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent-dim));display:flex;align-items:center;justify-content:center;">
+              <span style="font-family:'Poppins',sans-serif;font-weight:800;font-size:0.85rem;color:#000;">SS</span>
+            </div>
+            <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.95rem;">Stellamaries Syombua</span>
+          </div>
+          <p style="font-size:0.82rem;color:var(--text-muted);line-height:1.7;margin-bottom:1.25rem;">
+            Data Analyst and Machine Learning enthusiast based in Nairobi, Kenya, building practical, data-driven solutions that deliver real impact.
+          </p>
+          <div class="flex gap-2">
+            <a href="https://github.com" target="_blank" rel="noopener" class="social-btn" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://kaggle.com" target="_blank" rel="noopener" class="social-btn" aria-label="Kaggle" style="font-size:0.82rem;font-weight:700;font-family:'Poppins',sans-serif;">K</a>
+            <a href="https://orcid.org" target="_blank" rel="noopener" class="social-btn" aria-label="ORCID"><i class="fa-brands fa-orcid"></i></a>
+          </div>
+        </div>
+
+        <!-- Col 2: Navigation -->
+        <div>
+          <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.88rem;color:var(--text-main);letter-spacing:0.05em;margin-bottom:1.25rem;">Navigation</h3>
+          <ul class="flex flex-col gap-2" role="list">
+            <li><a href="#about"   class="footer-link">About Me</a></li>
+            <li><a href="#skills"  class="footer-link">Skills</a></li>
+            <li><a href="#projects" class="footer-link">Projects</a></li>
+            <li><a href="#services" class="footer-link">Services</a></li>
+            <li><a href="#case-studies" class="footer-link">Case Studies</a></li>
+            <li><a href="#certifications" class="footer-link">Certifications</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Profiles -->
+        <div>
+          <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.88rem;color:var(--text-main);letter-spacing:0.05em;margin-bottom:1.25rem;">Profiles</h3>
+          <ul class="flex flex-col gap-2" role="list">
+            <li>
+              <a href="https://github.com" target="_blank" rel="noopener" class="footer-link" style="display:flex;align-items:center;gap:8px;">
+                <i class="fa-brands fa-github" style="width:16px;color:var(--accent);"></i> GitHub
+              </a>
+            </li>
+            <li>
+              <a href="https://linkedin.com" target="_blank" rel="noopener" class="footer-link" style="display:flex;align-items:center;gap:8px;">
+                <i class="fa-brands fa-linkedin-in" style="width:16px;color:var(--accent);"></i> LinkedIn
+              </a>
+            </li>
+            <li>
+              <a href="https://kaggle.com" target="_blank" rel="noopener" class="footer-link" style="display:flex;align-items:center;gap:8px;">
+                <i class="fa-solid fa-k" style="width:16px;color:var(--accent);font-size:0.85rem;font-weight:700;"></i> Kaggle
+              </a>
+            </li>
+            <li>
+              <a href="https://orcid.org" target="_blank" rel="noopener" class="footer-link" style="display:flex;align-items:center;gap:8px;">
+                <i class="fa-brands fa-orcid" style="width:16px;color:var(--accent);"></i> ORCID
+              </a>
+            </li>
+            <li>
+              <a href="https://researchgate.net" target="_blank" rel="noopener" class="footer-link" style="display:flex;align-items:center;gap:8px;">
+                <i class="fa-brands fa-researchgate" style="width:16px;color:var(--accent);"></i> ResearchGate
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Contact -->
+        <div>
+          <h3 style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.88rem;color:var(--text-main);letter-spacing:0.05em;margin-bottom:1.25rem;">Contact</h3>
+          <div class="flex flex-col gap-3">
+            <a href="mailto:stellamarriessyombua@gmail.com" class="footer-link" style="display:flex;align-items:flex-start;gap:8px;">
+              <i class="fa-regular fa-envelope" style="color:var(--accent);margin-top:2px;width:16px;flex-shrink:0;"></i>
+              stellamarriessyombua@gmail.com
+            </a>
+            <span class="footer-link" style="display:flex;align-items:flex-start;gap:8px;cursor:default;">
+              <i class="fa-solid fa-location-dot" style="color:var(--accent);margin-top:2px;width:16px;flex-shrink:0;"></i>
+              Nairobi, Kenya
+            </span>
+            <span class="footer-link" style="display:flex;align-items:flex-start;gap:8px;cursor:default;">
+              <i class="fa-solid fa-circle" style="color:#22c55e;font-size:6px;margin-top:6px;width:16px;flex-shrink:0;"></i>
+              Available for projects
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div style="border-top:1px solid var(--border-sub);padding-top:1.5rem;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+        <p style="font-size:0.78rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;">
+          © 2026 Stellamaries Syombua. Crafted with <span style="color:var(--accent);">♥</span> &amp; data.
+        </p>
+        <p style="font-size:0.78rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;">
+          Data Analysis · Machine Learning · AI Solutions
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+
+    /* ============================================================
+       1. NAVBAR — scroll effect
+    ============================================================ */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }, { passive: true });
+
+    /* ============================================================
+       2. HAMBURGER MENU
+    ============================================================ */
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileMenu   = document.getElementById('mobile-menu');
+    const mobileLinks  = document.querySelectorAll('.mobile-nav-link');
+
+    hamburgerBtn.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburgerBtn.classList.toggle('open', isOpen);
+      hamburgerBtn.setAttribute('aria-expanded', isOpen.toString());
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburgerBtn.classList.remove('open');
+        hamburgerBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    /* ============================================================
+       3. SCROLL REVEAL ANIMATIONS
+    ============================================================ */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* ============================================================
+       4. TYPEWRITER EFFECT
+    ============================================================ */
+    const phrases = [
+      'Data Analysis',
+      'Machine Learning',
+      'Statistical Modeling',
+      'Data Visualization',
+      'Predictive Analytics',
+
+    ];
+    let phraseIdx = 0, charIdx = 0, deleting = false;
+    const tyEl = document.getElementById('typewriter');
+
+    function type() {
+      const current = phrases[phraseIdx];
+      if (!deleting) {
+        tyEl.textContent = current.substring(0, charIdx + 1);
+        charIdx++;
+        if (charIdx === current.length) {
+          deleting = true;
+          setTimeout(type, 1600);
+          return;
+        }
+      } else {
+        tyEl.textContent = current.substring(0, charIdx - 1);
+        charIdx--;
+        if (charIdx === 0) {
+          deleting = false;
+          phraseIdx = (phraseIdx + 1) % phrases.length;
+        }
+      }
+      setTimeout(type, deleting ? 60 : 90);
+    }
+    type();
+
+    /* ============================================================
+       5. ANIMATED COUNTERS
+    ============================================================ */
+    const counters = document.querySelectorAll('.counter');
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.animated) {
+          entry.target.dataset.animated = true;
+          const target = +entry.target.dataset.target;
+          const duration = 1800;
+          const step = Math.ceil(target / (duration / 16));
+          let current = 0;
+          const timer = setInterval(() => {
+            current += step;
+            if (current >= target) {
+              current = target;
+              clearInterval(timer);
+            }
+            entry.target.textContent = current;
+          }, 16);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => counterObserver.observe(c));
+
+    /* ============================================================
+       6. SKILL BAR ANIMATION
+    ============================================================ */
+    const skillBars = document.querySelectorAll('.skill-bar-fill');
+    const skillObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const width = entry.target.dataset.width;
+          entry.target.style.width = width + '%';
+          skillObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    skillBars.forEach(bar => skillObserver.observe(bar));
+
+    /* ============================================================
+       7. LIGHTBOX
+    ============================================================ */
+    const lightbox      = document.getElementById('lightbox');
+    const lightboxImg   = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    document.querySelectorAll('[data-lightbox="true"]').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    /* ============================================================
+       8. BACK TO TOP
+    ============================================================ */
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    /* ============================================================
+       9. TOAST NOTIFICATION
+    ============================================================ */
+    function showToast(msg, duration = 3500) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-msg');
+      toastMsg.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), duration);
+    }
+
+    /* ============================================================
+       10. NETLIFY FORMS HANDLER
+    ============================================================ */
+    const form = document.getElementById('contact-form');
+    const formStatus = document.getElementById('form-status');
+
+    function validateField(id, condition, errorId) {
+      const field = document.getElementById(id);
+      const errEl = document.getElementById(errorId);
+      if (!condition) {
+        field.classList.add('error');
+        errEl.classList.add('show');
+        return false;
+      } else {
+        field.classList.remove('error');
+        errEl.classList.remove('show');
+        return true;
+      }
+    }
+
+    document.getElementById('name')?.addEventListener('blur', function () {
+      validateField('name', this.value.trim().length > 1, 'name-error');
+    });
+
+    document.getElementById('email')?.addEventListener('blur', function () {
+      const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      validateField('email', emailRx.test(this.value.trim()), 'email-error');
+    });
+
+    document.getElementById('subject')?.addEventListener('blur', function () {
+      validateField('subject', this.value.trim().length > 2, 'subject-error');
+    });
+
+    document.getElementById('message')?.addEventListener('blur', function () {
+      validateField('message', this.value.trim().length >= 20, 'message-error');
+    });
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const nameVal    = document.getElementById('name').value.trim();
+      const emailVal   = document.getElementById('email').value.trim();
+      const subjectVal = document.getElementById('subject').value.trim();
+      const msgVal     = document.getElementById('message').value.trim();
+      const emailRx    = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      const v1 = validateField('name',    nameVal.length > 1,          'name-error');
+      const v2 = validateField('email',   emailRx.test(emailVal),      'email-error');
+      const v3 = validateField('subject', subjectVal.length > 2,       'subject-error');
+      const v4 = validateField('message', msgVal.length >= 20,         'message-error');
+
+      if (!(v1 && v2 && v3 && v4)) return;
+
+      const btn     = document.getElementById('submit-btn');
+      const btnText = document.getElementById('submit-text');
+      btn.disabled        = true;
+      btn.style.opacity   = '0.7';
+      btnText.textContent = 'Sending…';
+fetch('https://formspree.io/f/xbdwywkv', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      })
+      .then(response => {
+        if (response.ok) {
+          showToast('✓ Message sent! I\'ll reply within 24 hours.');
+          form.reset();
+        } else {
+          showToast('Something went wrong. Please email me directly.');
+        }
+      })
+      .catch(() => {
+        showToast('Something went wrong. Please email me directly.');
+      })
+      .finally(() => {
+        btn.disabled      = false;
+        btn.style.opacity = '1';
+        btnText.textContent = 'Send Message';
+      });
+    });
+
+    /* ============================================================
+       11. SMOOTH SCROLL FOR NAV LINKS
+    ============================================================ */
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        const target = document.querySelector(targetId);
+        if (!target) return;
+        e.preventDefault();
+        const offset = 72;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+    });
+
+    /* ============================================================
+       12. ACTIVE NAV LINK HIGHLIGHT ON SCROLL
+    ============================================================ */
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    function highlightNav() {
+      let current = '';
+      sections.forEach(section => {
+        const top = section.offsetTop - 100;
+        if (window.scrollY >= top) current = section.getAttribute('id');
+      });
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href').replace('#', '');
+        link.style.color = href === current ? 'var(--accent)' : '';
+      });
+    }
+    window.addEventListener('scroll', highlightNav, { passive: true });
+
+}); // closes DOMContentLoaded
+  </script>
